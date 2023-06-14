@@ -53,7 +53,7 @@ int top(Queue *q){
     return q->head->number;
 }
 
-//Maksymalny element
+//Ile_nieparzystych
 int ile_nieparzystych(Queue *q){
     Queue *Rob = new Queue;
     Rob->head = NULL;
