@@ -118,7 +118,7 @@ void del_pos(single_list *l, int position){
 void wyswietl(single_list *l){
     element *r;
 
-    if(isEmpty(l)){
+    if(isEmpty(l)){ //l->head == NULL
         cout << "Lista jest pusta !!!" << endl;
     }
     else{
@@ -131,12 +131,14 @@ void wyswietl(single_list *l){
     cout << endl;
 }
 
+//Jak na wykładzie
+
 //Ile dodatnich
 int ile_dodatnich(single_list *l){
     element *r;
     int licznik = 0;
 
-    if(isEmpty(l)){
+    if(isEmpty(l)){ //l->head == NULL
         cout << "Lista jest pusta !!!" << endl;
         return 0;
     }
@@ -157,7 +159,7 @@ int Max(single_list *l){
     element *r;
 
 
-    if(isEmpty(l)){
+    if(l->head == NULL){ //l->head == NULL
         cout << "Lista jest pusta !!!" << endl;
         return 0;
     }
@@ -177,47 +179,47 @@ int Max(single_list *l){
 
 }
 
-//Lista cyckliczna JK
+//Jak na laboratorium (z Counter !!!)
 
-//Ile dodatnich
-int ile_dodatnich(element *biezacy){
-    // jeœli lista jest pusta, zwróæ 0
-    if(biezacy == NULL){
-        return 0;
-    }
-
-    element *p = biezacy;
+//Ile ujemnych
+int ile_ujemnych(single_list *l){
+    int i = 1;
     int licznik = 0;
 
-    // zaczynamy od bie¿¹cego elementu i kontynuujemy, dopóki nie dojdziemy z powrotem do bie¿¹cego elementu
-    do{
-        if(p->number > 0){
-            licznik++;
+    element *temp = l->head;
+
+    while(i <= l->counter){
+
+        if(temp->number < 0){
+            licznik -= -1;
         }
-        p = p->next;
-    }while(p != biezacy);
+
+        temp = temp->next;
+        i++;
+    }
 
     return licznik;
 }
 
-//Max element
-int znajdz_max(element *biezacy){
+//Minimalny element
+int Min(single_list *l){
+    int i = 1;
 
-    if(biezacy == NULL){
-        return 0;
+    element *temp = l->head;
+
+    int Min = temp->number;
+
+    while(i <= l->counter){
+
+        if(temp->number < Min){
+            Min = temp->number;
+        }
+
+        temp = temp->next;
+        i++;
     }
 
-    int mmax = biezacy->number;
-    element *p = biezacy;
-
-    do{
-        if(p->number > mmax){
-            mmax = p->number;
-        }
-        p = p->next;
-    }while(p != biezacy);
-
-    return mmax;
+    return Min;
 }
 
 
@@ -234,9 +236,9 @@ int main()
     add_head(l,-5);
     add_tail(l,-20);
     add_head(l,-4);
-    add_tail(l,13);
+    add_tail(l,-33);
 
-    add_pos(l,9,2);
+    add_pos(l,77,2);
 
     cout << "Ilosc elementow: " << l->counter << endl;
 
@@ -251,10 +253,11 @@ int main()
 
     cout << "Ilosc dodatnich: " << ile_dodatnich(l) << endl;
 
-    wyswietl(l);
-
-    cout << "Ilosc elementow: " << l->counter << endl;
     cout << "Maksymalny element: " << Max(l) << endl;
+
+    cout << "Ilosc ujemnych elementow: " << ile_ujemnych(l) << endl;
+    cout << "Minimalny element: " << Min(l) << endl;
+    cout << "Ilosc elementow: " << l->counter << endl;
 
     delete l;
 
