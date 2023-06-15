@@ -222,6 +222,35 @@ int Min(single_list *l){
     return Min;
 }
 
+//Usun parzyste
+void usun_parzyste(single_list &l) {
+    element *prev = NULL;
+    element *curr = l.head;
+
+    while (curr != NULL) {
+        if (curr->number % 2 == 0) {
+            if (prev == NULL) {  // usuwamy głowę listy
+                l.head = curr->next;
+                if (l.head == NULL) {  // lista jest pusta
+                    l.tail = NULL;
+                }
+                delete curr;
+                curr = l.head;
+            } else {  // usuwamy element z środka listy
+                prev->next = curr->next;
+                if (curr->next == NULL) {  // usuwamy ostatni element listy
+                    l.tail = prev;
+                }
+                delete curr;
+                curr = prev->next;
+            }
+            l.counter--;
+        } else {
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+}
 
 
 int main()
