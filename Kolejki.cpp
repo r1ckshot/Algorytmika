@@ -107,6 +107,92 @@ int Min_element(Queue *q){
     return minEl;
 }
 
+//Tak jak powinno byc
+
+//Ile_nieparzystych
+int ile_nieparzystych(Queue *q){
+    Queue *Rob = new Queue;
+    Rob->head = NULL;
+    Rob->tail = NULL;
+
+    int licznik = 0;
+
+    while(!isEmpty(q)){
+        if(top(q) % 2 != 0){
+            licznik++;
+        }
+
+        push(Rob,pop(q));
+
+    }
+
+    while(!isEmpty(Rob)){
+
+        push(q,pop(Rob));
+    }
+
+    delete Rob;
+
+    return licznik;
+}
+
+//Minimalny element
+int Min_element(Queue *q){
+
+    Queue *Rob = new Queue;
+    Rob->head = NULL;
+    Rob->tail = NULL;
+
+    int minEl = top(q);
+
+    while(!isEmpty(q)){
+
+        if (top(q) < minEl){
+            minEl = top(q);
+        }
+
+        push(Rob,pop(q));
+    }
+
+    while(!isEmpty(Rob)){
+        push(q,pop(Rob));
+    }
+
+    delete Rob;
+
+    return minEl;
+}
+
+//Srednia
+float srednia(Queue *q){
+    Queue *Rob = new Queue;
+    Rob->head = NULL;
+    Rob->tail = NULL;
+
+    float suma = 0;
+    int licznik = 0;
+
+    while(!isEmpty(q)){
+
+        suma += top(q);
+        licznik++;
+
+        push(Rob,pop(q));
+
+    }
+
+    while(!isEmpty(Rob)){
+
+        push(q,pop(Rob));
+    }
+
+    delete Rob;
+
+    if(licznik != 0){
+        return suma/licznik;
+    }
+    else return 0;
+}
 
 int main()
 {
