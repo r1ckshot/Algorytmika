@@ -71,6 +71,26 @@ int ile_parz(element *&Stack){
     return licznik;
 }
 
+//Ile parzystych 2
+int ile_parz(element *Stack){
+    element *Rob = NULL;
+    int licznik = 0;
+
+    while(!isEmpty(Stack)){
+
+    if(top(Stack) % 2 == 0){
+        licznik++;
+    }
+        push(Rob,pop(Stack));
+    }
+
+    while(!isEmpty(Rob)){
+        push(Stack,pop(Rob));
+    }
+
+    return licznik;
+}
+
 //Minimalny element
 int Min(element *&Stack){
     element *Rob = NULL;
@@ -94,6 +114,50 @@ int Min(element *&Stack){
     }
 
     return Min;
+}
+
+//Minimalny element 2
+int Min(element *Stack){
+
+    element* Rob = NULL;
+
+    int Min = top(Stack);
+
+    while(!isEmpty(Stack)){
+        if(top(Stack) < Min){
+            Min = top(Stack);
+        }
+        push(Rob, pop(Stack));
+    }
+
+    while(!isEmpty(Rob)){
+        push(Stack, pop(Rob));
+    }
+
+    return Min;
+}
+
+//Srednia
+float srednia(element *Stack){
+    element *Rob = NULL;
+    float suma = 0;
+    int licznik = 0;
+
+    while(!isEmpty(Stack)){
+
+        suma += top(Stack);
+        licznik++;
+        push(Rob,pop(Stack));
+    }
+
+    while(!isEmpty(Rob)){
+        push(Stack,pop(Rob));
+    }
+
+    if(licznik !=0 ){
+        return suma/licznik;
+    }
+    else return 0;
 }
 
 int main()
